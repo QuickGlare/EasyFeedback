@@ -1,0 +1,7 @@
+name: EasyFeedback
+version: 1.0
+author: xQuickGlare
+main: it.xquickglare.easyfeedback.EasyFeedback
+commands: 
+  feedback:
+    description: A command for give the feedback about this server

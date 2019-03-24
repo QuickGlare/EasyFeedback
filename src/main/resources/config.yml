@@ -1,0 +1,25 @@
+database:
+  type: SQLITE #SQLITE or MYSQL
+  sqlite:
+    name: 'database.db'
+  mysql:
+    hostname: 'localhost'
+    username: 'root'
+    password: ''
+    database: 'easyfeedback'
+    port: 3306
+    
+feedbackTypes:
+  awesome: '&aAwesome server'
+  great: '&6This is a great server'
+  bad: '&cThis server is bad, i hate it'
+    
+messages:
+  onlyPlayer: '&cOnly players can execute this command'
+  feedback:
+    noExist: '&cThis feedback doesn''t exist'
+    alreadyDone: '&cYou''ve already added a feedback on this server'
+    done: '&aFeedback added!'
+    error: '&cAn error occurred while adding your feedback, please try later.'
+    header: '&6Give a feedback on the server'
+    
