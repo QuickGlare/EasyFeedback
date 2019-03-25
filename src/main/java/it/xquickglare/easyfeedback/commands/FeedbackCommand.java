@@ -4,6 +4,7 @@ import it.xquickglare.easyfeedback.EasyFeedback;
 import it.xquickglare.easyfeedback.feedback.FeedbackType;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,17 +29,18 @@ public class FeedbackCommand implements CommandExecutor {
                 player.sendMessage(plugin.getMessage("messages.feedback.noExist"));
                 return true;
             }
-            
-            if(plugin.getFeedbackManager().hasFeedback(player.getUniqueId())){
-                player.sendMessage(plugin.getMessage("messages.feedback.alreadyDone"));
-                return true;
-            }
-            
-            if(plugin.getFeedbackManager().addFeedback(player.getUniqueId(), type))
-                player.sendMessage(plugin.getMessage("messages.feedback.done"));
-            else 
-                player.sendMessage(plugin.getMessage("messages.feedback.error"));
-            
+
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                if(plugin.getFeedbackManager().hasFeedback(player.getUniqueId())){
+                    player.sendMessage(plugin.getMessage("messages.feedback.alreadyDone"));
+                    return;
+                }
+
+                if(plugin.getFeedbackManager().addFeedback(player.getUniqueId(), type))
+                    player.sendMessage(plugin.getMessage("messages.feedback.done"));
+                else
+                    player.sendMessage(plugin.getMessage("messages.feedback.error"));
+            });
             return true;
         }
         
